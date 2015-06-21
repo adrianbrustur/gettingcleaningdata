@@ -1,6 +1,3 @@
-# Ver 0.1
-# Purpose:
-# Read the 
 # Load the necessary libraries
 library(dplyr)
 library(reshape2)
@@ -116,6 +113,7 @@ X_merge[,(names(X_merge) %in% dropColumns)] <- list(NULL)
 # -------------------------------------------------------------------------------
 X_melted <- melt(X_merge, id.vars = c("activityName","subjectNo"))
 X_tidy <- dcast(X_melted, activityName+subjectNo~variable, fun.aggregate = mean, na.rm = TRUE)
+X_tidy <- arrange(X_tidy, activityName, as.numeric(subjectNo))
 
 # Step 6: Write the tidy data to a txt file created with write.table() using 
 # row.name=FALSE
@@ -123,4 +121,7 @@ X_tidy <- dcast(X_melted, activityName+subjectNo~variable, fun.aggregate = mean,
 if (!file.exists("tidydata")) {
         dir.create("tidydata")
 }
-write.table(X_tidy, file = "./tidydata/tidydata.txt", sep="\t", row.names = FALSE)
+# Write into file with Windows end of line characters
+write.table(X_tidy, file = "./tidydata/tidydata.txt", sep=" ", eol = "\r\n", row.names = FALSE)
+
+
