@@ -112,52 +112,9 @@ The aim of the data processing was to:
 
 1. Merge the training and the test sets to create one data set
 2. Extract only the mean and standard deviation for each measurement. The
-  values calculated are:
-* mean_tBodyAcc
-* std_tBodyAcc
-* mean_tGravityAcc
-* std_tGravityAcc
-* mean_tBodyAccJerk 
-* std_tBodyAccJerk
-* mean_tBodyGyro
-* std_tBodyGyro
-* mean_tBodyGyroJerk
-* std_tBodyGyroJerk
-* mean_tBodyAccMag
-* std_tBodyAccMag
-* mean_tGravityAccMag
-* std_tGravityAccMag
-* mean_tBodyAccJerkMag
-* std_tBodyAccJerkMag
-* mean_tBodyGyroMag
-* std_tBodyGyroMag
-* mean_tBodyGyroJerkMag
-* std_tBodyGyroJerkMag
-* mean_fBodyAcc
-* std_fBodyAcc
-* mean_fBodyAccJerk
-* std_fBodyAccJerk
-* mean_fBodyGyro
-* std_fBodyGyro
-* mean_fBodyAccMag
-* std_fBodyAccMag
-* mean_fBodyBodyAccJerkMag
-* std_fBodyBodyAccJerkMag
-* mean_fBodyBodyGyroMag
-* std_fBodyBodyGyroMag
-* mean_fBodyBodyGyroJerkMag
-* std_fBodyBodyGyroJerkMag
-
+  values calculated are: mean_tBodyAcc, std_tBodyAcc, mean_tGravityAcc, std_tGravityAcc, mean_tBodyAccJerk, std_tBodyAccJerk, mean_tBodyGyro, std_tBodyGyro, mean_tBodyGyroJerk, std_tBodyGyroJerk, mean_tBodyAccMag, std_tBodyAccMag, mean_tGravityAccMag, std_tGravityAccMag, mean_tBodyAccJerkMag, std_tBodyAccJerkMag, mean_tBodyGyroMag, std_tBodyGyroMag, mean_tBodyGyroJerkMag, std_tBodyGyroJerkMag, mean_fBodyAcc,  std_fBodyAcc, mean_fBodyAccJerk, std_fBodyAccJerk, mean_fBodyGyro, std_fBodyGyro, mean_fBodyAccMag, std_fBodyAccMag, mean_fBodyBodyAccJerkMag, std_fBodyBodyAccJerkMag, mean_fBodyBodyGyroMag, std_fBodyBodyGyroMag, mean_fBodyBodyGyroJerkMag and std_fBodyBodyGyroJerkMag
 3. Use descriptive activity names to name the activities in the data set. The
-  activity names are:
-
-* WALKING
-* WALKING_UPSTAIRS
-* WALKING_DOWNSTAIRS
-* SITTING
-* STANDING
-* LAYING
-
+  activity names are: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING and LAYING
 4. Appropriately label the data set with descriptive variable names
 5. Create a second, independent tidy data set with the average of each variable for each activity and each subject
 
@@ -191,13 +148,7 @@ measurements taken from the sensors. The meaning and representation of the featu
 
 The list of fields created in the tidy data set is:
 - "activityName" - this is a character vector whose values can be one of the
-  six values:
-1. WALKING
-2. WALKING_UPSTAIRS
-3. WALKING_DOWNSTAIRS
-4. SITTING
-5. STANDING
-6. LAYING
+  six values: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
 - "subjectNo" - this is an integer value representing the patient number and
   can be between 1 to 30
 - "tBodyAccmeanX"
