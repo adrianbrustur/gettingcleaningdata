@@ -5,12 +5,14 @@ This file describes the data and the processing of the data collected from a res
 
 #Data collection method
 During the study each person had a Samsung Galaxy SII smartphone attached to their waist while performing six activities:
+
 - WALKING
 - WALKING_UPSTAIRS
 - WALKING_DOWNSTAIRS
 - SITTING
 - STANDING
 - LAYING
+
 Using the smart phones embedded accelerometer and gyroscope, the research
 team captured the 3-axial linear acceleration and the 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
 
@@ -19,6 +21,7 @@ The data is supplied as multiple .txt files, each with a different content.
 These data files have not been included in this documentation, but constitute
 the output of the gathering process and the input for the data
 cleaning and processing process. These files are:
+
 - 'activity_labels.txt': Links the class labels with their activity name.
 
 - 'train/X_train.txt': Training set.
@@ -41,95 +44,18 @@ The following files are available for the train and test data. Their description
 
 #Input data record structure
 Each record contains:
+
 - Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
 - Triaxial Angular velocity from the gyroscope. 
 - A 561-feature vector with time and frequency domain variables. 
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 
-#Data processing
-##Purpose
-The aim of the data processing was to:
-- Merge the training and the test sets to create one data set
-- Extract only the mean and standard deviation for each measurement. The
-  values calculated are:
-* mean_tBodyAcc
-* std_tBodyAcc
-* mean_tGravityAcc
-* std_tGravityAcc
-* mean_tBodyAccJerk 
-* std_tBodyAccJerk
-* mean_tBodyGyro
-* std_tBodyGyro
-* mean_tBodyGyroJerk
-* std_tBodyGyroJerk
-* mean_tBodyAccMag
-* std_tBodyAccMag
-* mean_tGravityAccMag
-* std_tGravityAccMag
-* mean_tBodyAccJerkMag
-* std_tBodyAccJerkMag
-* mean_tBodyGyroMag
-* std_tBodyGyroMag
-* mean_tBodyGyroJerkMag
-* std_tBodyGyroJerkMag
-* mean_fBodyAcc
-* std_fBodyAcc
-* mean_fBodyAccJerk
-* std_fBodyAccJerk
-* mean_fBodyGyro
-* std_fBodyGyro
-* mean_fBodyAccMag
-* std_fBodyAccMag
-* mean_fBodyBodyAccJerkMag
-* std_fBodyBodyAccJerkMag
-* mean_fBodyBodyGyroMag
-* std_fBodyBodyGyroMag
-* mean_fBodyBodyGyroJerkMag
-* std_fBodyBodyGyroJerkMag
-
-- Use descriptive activity names to name the activities in the data set. The
-  activity names are:
-* WALKING
-* WALKING_UPSTAIRS
-* WALKING_DOWNSTAIRS
-* SITTING
-* STANDING
-* LAYING
-
-- Appropriately label the data set with descriptive variable names
-- Create a second, independent tidy data set with the average of each variable for each activity and each subject
-
-##R code
-The R script that performs the above transformation is called *run_analysis.R*.
-The code:
-- reads the *features.txt* file and converts the column names into valid R
-  variable names by eliminating the characters: ( ) and ,
-- reads the test data set from the *X_test.txt*, *y_test.txt* and *subject_test.txt* files supplied and merges them into a *X_test_DF* data
-frame. This data frame contains all the original features plus the *subjectNo* and *activityNo* columns
-- reads the training data set from the *X_training.txt*, *y_training.txt* and
-  *subject_training.txt* files supplied and merges them into a *X_test_DF* data
-frame. This data frame contains all the original features plus the *subjectNo* and *activityNo* columns
-- merges the test and training data frames into one data frame called
-  *X_merge*
-- calculates the mean and standard deviation of the list of variables
-  specified in the previous section
-- reads the *activity_labels.txt* file and merges its data with *X_merge*
-- calculates the mean of all the variables, makes the data tidy and writes it into a file using the space separator
-
-##Output data
-The tidy data is written into a space separated text file called *tidydata.txt*. This file contains
-the means of the acceleration and angular measurements for each of the six
-activities and for each of the 30 persons.
-
-### Output data fields
-All the fields except the "activityName" are numeric and represent the
-measurements taken from the sensors. 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
 Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
 
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAccXYZ, fBodyAccJerkXYZ, fBodyGyroXYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
 
 These signals were used to estimate variables of the feature vector for each pattern:  
 'XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
@@ -174,21 +100,104 @@ The set of variables that were estimated from these signals are:
 
 Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
 
-gravityMean
-tBodyAccMean
-tBodyAccJerkMean
-tBodyGyroMean
-tBodyGyroJerkMean
+- gravityMean
+- tBodyAccMean
+- tBodyAccJerkMean
+- tBodyGyroMean
+- tBodyGyroJerkMean
 
-The list of fields created in the tidy data set is:
-- "activityName" - this is a character vector whose values can be one of the
-  six values:
+#Data processing
+##Purpose
+The aim of the data processing was to:
+
+1. Merge the training and the test sets to create one data set
+2. Extract only the mean and standard deviation for each measurement. The
+  values calculated are:
+* mean_tBodyAcc
+* std_tBodyAcc
+* mean_tGravityAcc
+* std_tGravityAcc
+* mean_tBodyAccJerk 
+* std_tBodyAccJerk
+* mean_tBodyGyro
+* std_tBodyGyro
+* mean_tBodyGyroJerk
+* std_tBodyGyroJerk
+* mean_tBodyAccMag
+* std_tBodyAccMag
+* mean_tGravityAccMag
+* std_tGravityAccMag
+* mean_tBodyAccJerkMag
+* std_tBodyAccJerkMag
+* mean_tBodyGyroMag
+* std_tBodyGyroMag
+* mean_tBodyGyroJerkMag
+* std_tBodyGyroJerkMag
+* mean_fBodyAcc
+* std_fBodyAcc
+* mean_fBodyAccJerk
+* std_fBodyAccJerk
+* mean_fBodyGyro
+* std_fBodyGyro
+* mean_fBodyAccMag
+* std_fBodyAccMag
+* mean_fBodyBodyAccJerkMag
+* std_fBodyBodyAccJerkMag
+* mean_fBodyBodyGyroMag
+* std_fBodyBodyGyroMag
+* mean_fBodyBodyGyroJerkMag
+* std_fBodyBodyGyroJerkMag
+
+3. Use descriptive activity names to name the activities in the data set. The
+  activity names are:
+
 * WALKING
 * WALKING_UPSTAIRS
 * WALKING_DOWNSTAIRS
 * SITTING
 * STANDING
 * LAYING
+
+4. Appropriately label the data set with descriptive variable names
+5. Create a second, independent tidy data set with the average of each variable for each activity and each subject
+
+##R code
+The R script that performs the above transformation is called *run_analysis.R*.
+The code:
+
+- reads the *features.txt* file and converts the column names into valid R
+  variable names by eliminating the characters: ( ) and ,
+- reads the test data set from the *X_test.txt*, *y_test.txt* and *subject_test.txt* files supplied and merges them into a *X_test_DF* data
+frame. This data frame contains all the original features plus the *subjectNo* and *activityNo* columns
+- reads the training data set from the *X_training.txt*, *y_training.txt* and
+  *subject_training.txt* files supplied and merges them into a *X_test_DF* data
+frame. This data frame contains all the original features plus the *subjectNo* and *activityNo* columns
+- merges the test and training data frames into one data frame called
+  *X_merge*
+- calculates the mean and standard deviation of the list of variables
+  specified in the previous section
+- reads the *activity_labels.txt* file and merges its data with *X_merge*
+- calculates the mean of all the variables, makes the data tidy and writes it into a file using the space separator
+
+##Output data
+The tidy data is written into a space separated text file called *tidydata.txt*. This file contains
+the means of the acceleration and angular measurements for each of the six
+activities and for each of the 30 persons.
+
+### Output data fields
+All the fields except the "activityName" are numeric and represent the
+measurements taken from the sensors. The meaning and representation of the feature set is the same as for the input data set.
+
+
+The list of fields created in the tidy data set is:
+- "activityName" - this is a character vector whose values can be one of the
+  six values:
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
 - "subjectNo" - this is an integer value representing the patient number and
   can be between 1 to 30
 - "tBodyAccmeanX"
@@ -752,6 +761,7 @@ The list of fields created in the tidy data set is:
 - "angleX.gravityMean"
 - "angleY.gravityMean"
 - "angleZ.gravityMean"
+
 ##Measurement units
 The acceleration signal from the smartphone accelerometers X, Y and Z axis are
 measured in standard gravity units 'g'.
